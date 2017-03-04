@@ -34,10 +34,10 @@ instance IRGVectorClass IRGVector where
     norm v = sqrt $ scalarProduct v v
     normalize (IRGVector v) = scalarMultiply v ( 1 / norm v)
     cosine (IRGVector v1) v2 = scalarProduct v1 v2 / (norm v1 * norm v2)
-    vectorProduct (v1@(IRGVector vb1)) (v2@(IRGVector vb2)) =
+    vectorProduct (v1@(IRGVector vb1)) v2 =
         if getDimension v1 == 3 && getDimension v2 == 3
-            then vectorProduct vb1 vb2
+            then vectorProduct vb1 v2
             else error "Try to calculate vector product of not 3 dimensional vectors."
     fromHomogeneus (IRGVector v) = fromHomogeneus v
-    copyPart = copyPart
+    copyPart (IRGVector v) = copyPart v
     toHaskellVector (IRGVector v) = toHaskellVector v

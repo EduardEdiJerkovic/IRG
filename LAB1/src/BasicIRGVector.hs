@@ -19,8 +19,8 @@ instance IRGVectorClass BasicIRGVector where
     scalarProduct v1 v2 =  V.sum $ V.zipWith (*) (toHaskellVector v1) (toHaskellVector v2)
     vectorProduct (BasicIRGVector v1) (BasicIRGVector v2) = IRGVector $ BasicIRGVector $ V.fromList [(v1 ! 1) * (v2 ! 2) - (v1 ! 2) * (v2 ! 1), (v1 ! 2) * (v2 ! 0) - (v1 ! 0) * (v2 ! 2), (v1 ! 0) * (v2 ! 1) - (v1 ! 1) * (v2 ! 0)]
     fromHomogeneus v = V.map (* V.last) V.take (V.length v - 1)
-    copyPart (v@(BasicIRGVector vb)) n =
-        if n > getDimension v
-            then IRGVector $ BasicIRGVector $ v ++ (V.replicate (n - getDimension v) 0)
+    copyPart (BasicIRGVector v) n =
+        if n > V.length v
+            then IRGVector $ BasicIRGVector $ v ++ (V.replicate (n - V.length v 0)
             else IRGVector $ BasicIRGVector $ V.take n v
     toHaskellVector (BasicIRGVector v) = v
