@@ -22,7 +22,7 @@ instance IRGMatrixClass BasicIRGMatrix where
     -- Returns length of vector of vektors (matrix).
     getColsCount (BasicIRGMatrix m) = V.length m
 
-    get (mb@BasicIRGMatrix m) i j = if
-        | (i < 0 || i >= (getRowsCount mb)) -> error "Row index out of boundaries."
-        | (j < 0 || j >= (getColsCount mb)) -> error "Columnes index out of boundaries."
-        | otherwise (m ! j) ! i
+    get mb@(BasicIRGMatrix m) i j = if
+        | (i < 0 || i >= getRowsCount mb -> error "Row index out of boundaries."
+        | j < 0 || j >= getColsCount mb -> error "Columnes index out of boundaries."
+        | otherwise -> m ! j ! i
